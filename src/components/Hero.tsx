@@ -1,7 +1,7 @@
 import React from 'react';
 import { Star, MapPin, Calendar, ArrowRight, ShieldCheck, Clock, Wine, UtensilsCrossed } from 'lucide-react';
 import { Language } from '../types';
-
+import logo from '../assets/images/5150cea9-ec35-4ea3-b6dc-72432e344d32.png'
 interface HeroProps {
   currentLang: Language;
   onOpenReservation: () => void;
@@ -177,7 +177,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenReservation }) =>
               <div className="relative rounded-2xl bg-black border-4 border-black p-3 shadow-xl">
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-black">
                   <img
-                    src="/src/assets/images/nova_flamenco_poster_1784988560790.jpg"
+                    src={logo}
                     alt="Nova eTapa Tapas & Copas Poster"
                     className="w-full h-full object-contain bg-black"
                     referrerPolicy="no-referrer"

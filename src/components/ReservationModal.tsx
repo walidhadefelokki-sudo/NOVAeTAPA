@@ -9,6 +9,15 @@ interface ReservationModalProps {
   currentLang: Language;
 }
 
+// Replace with your Apps Script Web App /exec URL (Deploy -> New deployment -> Web app)
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+
+const generateBookingId = () => {
+  const datePart = new Date().toISOString().slice(2, 10).replace(/-/g, '');
+  const randomPart = Math.floor(1000 + Math.random() * 9000);
+  return `RES-${datePart}-${randomPart}`;
+};
+
 export const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose, currentLang }) => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [guestName, setGuestName] = useState('');
@@ -40,10 +49,17 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onCl
     e.preventDefault();
     setLoading(true);
 
+    const bookingId = generateBookingId();
+
     try {
-      const res = await fetch('/api/reservations', {
+      // Apps Script Web Apps don't return readable CORS responses from the browser
+      // when called with the default mode, so we fire the request with 'no-cors'
+      // and build the confirmation locally. The Apps Script itself still generates
+      // and stores its own booking id in the Sheet as a source of truth.
+      await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' }, // avoids a CORS preflight
         body: JSON.stringify({
           guestName,
           email,
@@ -53,24 +69,32 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onCl
           guestsCount,
           seatingArea,
           specialRequests,
+          currentLang,
         }),
       });
 
-      const data = await res.json();
-      if (data.success && data.reservation) {
-        setConfirmedBooking(data.reservation);
+      setConfirmedBooking({
+        id: bookingId,
+        guestName,
+        email,
+        phone,
+        date,
+        time,
+        guestsCount,
+        seatingArea,
+        specialRequests,
+      } as ReservationRequest);
 
-        // Fire celebration confetti
-        try {
-          confetti({
-            particleCount: 80,
-            spread: 70,
-            origin: { y: 0.6 },
-            colors: ['#e11d48', '#b91c1c', '#fbbf24', '#ffffff'],
-          });
-        } catch (err) {
-          // Fallback if confetti blocked
-        }
+      // Fire celebration confetti
+      try {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#e11d48', '#b91c1c', '#fbbf24', '#ffffff'],
+        });
+      } catch (err) {
+        // Fallback if confetti blocked
       }
     } catch (err) {
       console.error('Failed booking:', err);

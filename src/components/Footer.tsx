@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Wine, MapPin, Phone, Mail, Clock, ArrowRight, Heart, Check } from 'lucide-react';
 import { Language } from '../types';
+import logoImage from '../assets/images/logoimage.png';
 
 interface FooterProps {
   currentLang: Language;
@@ -27,9 +28,11 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenReservation }
           {/* Col 1 & 2: Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-lg bg-black p-1 border border-zinc-300 flex items-center justify-center">
-                <Wine className="w-5 h-5 text-red-500" />
-              </div>
+              <img
+                            src={logoImage}
+                            alt="Dar L'emploi"
+                            className="h-10 sm:h-12 w-auto block object-contain"
+                          />
               <div>
                 <div className="text-xl font-black tracking-tight text-black flex items-center gap-0.5">
                   <span>NOVA</span>

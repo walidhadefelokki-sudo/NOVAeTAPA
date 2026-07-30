@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MapPin, Clock, Calendar, Utensils, Globe, Menu as MenuIcon, X, Wine } from 'lucide-react';
+import { Phone, MapPin, Clock, Utensils, Globe, Menu as MenuIcon, X, Wine, ShoppingBag } from 'lucide-react';
 import { Language } from '../types';
-import logoImage from '../assets/images/logoimage.png';
+
 interface HeaderProps {
   currentLang: Language;
   onSelectLang: (lang: Language) => void;
-  onOpenReservation: () => void;
+  onOpenOrderModal: () => void;
   onOpenOrderDrawer: () => void;
   orderCount: number;
 }
@@ -13,7 +13,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   currentLang,
   onSelectLang,
-  onOpenReservation,
+  onOpenOrderModal,
   onOpenOrderDrawer,
   orderCount,
 }) => {
@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
       reviews: '4.7★ Reseñas',
       location: 'Palma Nova',
       vibe: 'Ambiente',
-      reserve: 'Reservar Mesa',
+      orderOnline: 'Pedir Online',
       tastingBox: 'Mi Pedido',
       hours: '10:00 - 23:00 (Miércoles cerrado)',
     },
@@ -43,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({
       reviews: '4.7★ Reviews',
       location: 'Palma Nova',
       vibe: 'Atmosphere',
-      reserve: 'Book Table',
+      orderOnline: 'Order Online',
       tastingBox: 'My Tray',
       hours: '10:00 AM - 11:00 PM (Wed Closed)',
     },
@@ -110,11 +110,11 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Logo Brand matching Nova eTapa poster */}
           <a href="#" className="group flex items-center gap-2 sm:gap-3 shrink-0">
-            <img
-              src={logoImage}
-              alt="Dar L'emploi"
-              className="h-10 sm:h-12 w-auto block object-contain"
-            />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-black border-2 border-red-600 flex items-center justify-center transition-all relative overflow-hidden shrink-0">
+              <div className="absolute top-1 left-1 w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-red-600" />
+              <div className="absolute bottom-1 right-1 w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-white" />
+              <Wine className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
+            </div>
             <div>
               <div className="text-lg sm:text-2xl font-black tracking-tight text-black flex items-center gap-0.5 leading-none uppercase">
                 <span>Nova</span>
@@ -176,13 +176,13 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </button>
 
-            {/* Primary Reserve Table Button */}
+            {/* Primary Order Online Button */}
             <button
-              onClick={onOpenReservation}
+              onClick={onOpenOrderModal}
               className="min-h-[36px] sm:min-h-[42px] px-2.5 sm:px-5 py-1.5 sm:py-2.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white font-extrabold text-[11px] sm:text-sm transition-all flex items-center gap-1 sm:gap-2 uppercase tracking-wider shadow-sm border border-red-700"
             >
-              <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span>{t.reserve}</span>
+              <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>{t.orderOnline}</span>
             </button>
 
             {/* Mobile Menu Toggle Button */}

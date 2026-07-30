@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Wine, MapPin, Phone, Mail, Clock, ArrowRight, Heart, Check } from 'lucide-react';
 import { Language } from '../types';
-import logoImage from '../assets/images/logoimage.png';
 
 interface FooterProps {
   currentLang: Language;
-  onOpenReservation: () => void;
+  onOpenOrderModal: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenReservation }) => {
+export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenOrderModal }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -28,11 +27,9 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenReservation }
           {/* Col 1 & 2: Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <img
-                            src={logoImage}
-                            alt="Dar L'emploi"
-                            className="h-10 sm:h-12 w-auto block object-contain"
-                          />
+              <div className="w-10 h-10 rounded-lg bg-black p-1 border border-zinc-300 flex items-center justify-center">
+                <Wine className="w-5 h-5 text-red-500" />
+              </div>
               <div>
                 <div className="text-xl font-black tracking-tight text-black flex items-center gap-0.5">
                   <span>NOVA</span>
@@ -45,11 +42,10 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenReservation }
               </div>
             </div>
 
-            <p className="text-xs text-zinc-700 leading-relaxed max-w-sm font-medium">
-              {currentLang === 'es'
-                ? 'Coctelería de autor y tapas españolas en el paseo marítimo Passeig Mar de Palma Nova. Sabores mediterráneos a 100 metros del mar.'
-                : 'Palma Nova’s premier cocktail lounge and tapas bar on Passeig Mar promenade. Craft mixology and local tapas 100m from the sea.'}
+            <p className="text-xs text-zinc-700 leading-relaxed max-w-sm font-bold">
+              Homemade Sangrias & Local Tapas
             </p>
+
 
             <div className="space-y-1.5 text-xs text-zinc-800 font-bold">
               <div className="flex items-center gap-2">
@@ -115,8 +111,8 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenReservation }
           <div className="flex items-center gap-4">
             <span>Passeig Mar 32, Palma Nova</span>
             <span>•</span>
-            <button onClick={onOpenReservation} className="hover:text-red-600 font-bold uppercase">
-              {currentLang === 'es' ? 'Reservar Mesa' : 'Book a Table'}
+            <button onClick={onOpenOrderModal} className="hover:text-red-600 font-bold uppercase">
+              {currentLang === 'es' ? 'Pedir Online' : 'Order Online'}
             </button>
           </div>
         </div>

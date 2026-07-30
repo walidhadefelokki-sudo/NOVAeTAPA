@@ -11,16 +11,13 @@ const PORT = 3000;
 app.use(express.json());
 
 // In-memory database for demo storage
-const reservationsDatabase: Array<{
+const ordersDatabase: Array<{
   id: string;
-  guestName: string;
-  email: string;
   phone: string;
-  date: string;
-  time: string;
-  guestsCount: number;
-  seatingArea: string;
-  specialRequests?: string;
+  customerName?: string;
+  items: Array<{ id: string; name: string; price: number; quantity: number }>;
+  totalAmount: number;
+  notes?: string;
   createdAt: string;
   status: 'confirmed';
 }> = [];
@@ -38,48 +35,45 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Table Reservation Endpoint
-app.post('/api/reservations', (req, res) => {
+// Online Order Endpoint
+app.post('/api/orders', (req, res) => {
   try {
-    const { guestName, email, phone, date, time, guestsCount, seatingArea, specialRequests } = req.body;
+    const { phone, customerName, items, totalAmount, notes } = req.body;
 
-    if (!guestName || !phone || !date || !time) {
-      return res.status(400).json({ error: 'Missing required reservation fields' });
+    if (!phone) {
+      return res.status(400).json({ error: 'Phone number is required to place an order' });
     }
 
-    const refCode = 'NV-' + Math.floor(100000 + Math.random() * 900000);
-    const newBooking = {
-      id: refCode,
-      guestName,
-      email: email || 'guest@palmanova.es',
+    const orderRef = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+    const newOrder = {
+      id: orderRef,
       phone,
-      date,
-      time,
-      guestsCount: Number(guestsCount) || 2,
-      seatingArea: seatingArea || 'terrace',
-      specialRequests: specialRequests || '',
+      customerName: customerName || 'Cliente NOVAeTAPA',
+      items: Array.isArray(items) ? items : [],
+      totalAmount: Number(totalAmount) || 0,
+      notes: notes || '',
       createdAt: new Date().toISOString(),
       status: 'confirmed' as const,
     };
 
-    reservationsDatabase.push(newBooking);
+    ordersDatabase.push(newOrder);
 
     return res.status(201).json({
       success: true,
-      message: 'Table reservation confirmed successfully at NOVAeTAPA',
-      reservation: newBooking,
+      message: 'Order confirmed successfully at NOVAeTAPA',
+      order: newOrder,
     });
   } catch (error) {
-    console.error('Reservation Error:', error);
-    return res.status(500).json({ error: 'Failed to process reservation' });
+    console.error('Order Processing Error:', error);
+    return res.status(500).json({ error: 'Failed to process order' });
   }
 });
 
-// Get User Reservations
-app.get('/api/reservations', (req, res) => {
+// Get User Orders
+app.get('/api/orders', (req, res) => {
   res.json({
-    count: reservationsDatabase.length,
-    reservations: reservationsDatabase,
+    count: ordersDatabase.length,
+    orders: ordersDatabase,
   });
 });
 

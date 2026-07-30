@@ -6,14 +6,14 @@ import { ReviewsSection } from './components/ReviewsSection';
 import { AtmosphereSection } from './components/AtmosphereSection';
 import { LocationSection } from './components/LocationSection';
 import { Footer } from './components/Footer';
-import { ReservationModal } from './components/ReservationModal';
+import { OrderModal } from './components/OrderModal';
 import { TastingOrderDrawer } from './components/TastingOrderDrawer';
 import { MENU_ITEMS } from './data/menuData';
 import { Language, MenuItem, SelectedOrderItem } from './types';
 
 export default function App() {
   const [currentLang, setCurrentLang] = useState<Language>('es');
-  const [isReservationOpen, setIsReservationOpen] = useState(false);
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [isOrderDrawerOpen, setIsOrderDrawerOpen] = useState(false);
   const [selectedItemsMap, setSelectedItemsMap] = useState<Record<string, number>>({});
 
@@ -69,20 +69,20 @@ export default function App() {
         <Header
           currentLang={currentLang}
           onSelectLang={setCurrentLang}
-          onOpenReservation={() => setIsReservationOpen(true)}
+          onOpenOrderModal={() => setIsOrderModalOpen(true)}
           onOpenOrderDrawer={() => setIsOrderDrawerOpen(true)}
           orderCount={totalItemCount}
         />
 
         {/* Main Page Sections */}
         <main>
-          <Hero currentLang={currentLang} onOpenReservation={() => setIsReservationOpen(true)} />
+          <Hero currentLang={currentLang} onOpenOrderModal={() => setIsOrderModalOpen(true)} />
 
           <MenuSection
             currentLang={currentLang}
             onAddItemToTray={handleAddItemToTray}
             selectedItemsMap={selectedItemsMap}
-            onOpenReservation={() => setIsReservationOpen(true)}
+            onOpenOrderModal={() => setIsOrderModalOpen(true)}
           />
 
           <ReviewsSection currentLang={currentLang} />
@@ -93,12 +93,14 @@ export default function App() {
         </main>
 
         {/* Footer */}
-        <Footer currentLang={currentLang} onOpenReservation={() => setIsReservationOpen(true)} />
+        <Footer currentLang={currentLang} onOpenOrderModal={() => setIsOrderModalOpen(true)} />
 
         {/* Modals & Slide-over Drawers */}
-        <ReservationModal
-          isOpen={isReservationOpen}
-          onClose={() => setIsReservationOpen(false)}
+        <OrderModal
+          isOpen={isOrderModalOpen}
+          onClose={() => setIsOrderModalOpen(false)}
+          selectedItems={selectedOrderItemsList}
+          onClearOrder={handleClearOrder}
           currentLang={currentLang}
         />
 
@@ -108,9 +110,9 @@ export default function App() {
           selectedItems={selectedOrderItemsList}
           onUpdateQuantity={handleUpdateQuantity}
           onClearOrder={handleClearOrder}
-          onOpenReservationWithOrder={() => {
+          onOpenOrderModal={() => {
             setIsOrderDrawerOpen(false);
-            setIsReservationOpen(true);
+            setIsOrderModalOpen(true);
           }}
           currentLang={currentLang}
         />

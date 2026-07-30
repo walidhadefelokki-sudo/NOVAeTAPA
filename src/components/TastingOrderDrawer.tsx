@@ -8,7 +8,7 @@ interface TastingOrderDrawerProps {
   selectedItems: SelectedOrderItem[];
   onUpdateQuantity: (itemId: string, delta: number) => void;
   onClearOrder: () => void;
-  onOpenReservationWithOrder: () => void;
+  onOpenOrderModal: () => void;
   currentLang: Language;
 }
 
@@ -18,7 +18,7 @@ export const TastingOrderDrawer: React.FC<TastingOrderDrawerProps> = ({
   selectedItems,
   onUpdateQuantity,
   onClearOrder,
-  onOpenReservationWithOrder,
+  onOpenOrderModal,
   currentLang,
 }) => {
   if (!isOpen) return null;
@@ -119,11 +119,11 @@ export const TastingOrderDrawer: React.FC<TastingOrderDrawerProps> = ({
               <button
                 onClick={() => {
                   onClose();
-                  onOpenReservationWithOrder();
+                  onOpenOrderModal();
                 }}
                 className="w-full py-3.5 rounded-xl bg-gradient-to-r from-red-700 via-red-600 to-red-800 hover:from-red-600 hover:to-red-700 active:scale-95 text-white font-extrabold text-xs shadow-xl shadow-red-950 flex items-center justify-center gap-2 transition-all uppercase tracking-wider"
               >
-                <span>{currentLang === 'es' ? 'Adjuntar Selección a Reserva de Mesa' : 'Attach Tray to Table Reservation'}</span>
+                <span>{currentLang === 'es' ? 'Realizar Pedido con mi Teléfono' : 'Place Order with Phone Number'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 

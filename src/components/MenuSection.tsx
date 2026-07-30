@@ -24,14 +24,14 @@ interface MenuSectionProps {
   currentLang: Language;
   onAddItemToTray: (item: MenuItem) => void;
   selectedItemsMap: Record<string, number>;
-  onOpenReservation: () => void;
+  onOpenOrderModal: () => void;
 }
 
 export const MenuSection: React.FC<MenuSectionProps> = ({
   currentLang,
   onAddItemToTray,
   selectedItemsMap,
-  onOpenReservation,
+  onOpenOrderModal,
 }) => {
   const [activeTab, setActiveTab] = useState<MenuCategory | 'all'>('all');
   const [activeFilterTag, setActiveFilterTag] = useState<string>('all');
@@ -621,21 +621,21 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
               <Sparkles className="w-5 h-5 text-red-500" />
               <span>
                 {currentLang === 'es'
-                  ? '¿Quieres reservar mesa para cenar en Palma Nova?'
-                  : 'Want to book a table for dinner in Palma Nova?'}
+                  ? '¿Quieres hacer tu pedido online en Palma Nova?'
+                  : 'Want to place an online order in Palma Nova?'}
               </span>
             </h4>
             <p className="text-xs text-zinc-300 font-medium">
               {currentLang === 'es'
-                ? 'Garantiza tu mesa en terraza o interior para disfrutar de nuestras tapas y copas recién hechas.'
-                : 'Guarantee your table on our terrace or lounge to enjoy fresh tapas and cocktails.'}
+                ? 'Introduce tu número de teléfono y confirma tu pedido de tapas y bebidas al instante.'
+                : 'Enter your phone number and confirm your tapas & drinks order instantly.'}
             </p>
           </div>
           <button
-            onClick={onOpenReservation}
+            onClick={onOpenOrderModal}
             className="px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-black text-xs sm:text-sm transition-all shrink-0 uppercase tracking-widest active:scale-95"
           >
-            {currentLang === 'es' ? 'Reservar Mesa' : 'Book Table'}
+            {currentLang === 'es' ? 'Pedir Online' : 'Order Online'}
           </button>
         </div>
       </div>

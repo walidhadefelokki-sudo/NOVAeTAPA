@@ -44,18 +44,15 @@ export interface ReviewItem {
   categoryTags?: string[];
 }
 
-export interface ReservationRequest {
+export interface OnlineOrderRequest {
   id?: string;
-  guestName: string;
-  email: string;
   phone: string;
-  date: string;
-  time: string;
-  guestsCount: number;
-  seatingArea: 'terrace' | 'lounge' | 'bar';
-  specialRequests?: string;
+  customerName?: string;
+  items: SelectedOrderItem[];
+  totalAmount: number;
+  notes?: string;
   createdAt?: string;
-  status?: 'confirmed' | 'pending';
+  status?: 'confirmed' | 'preparing' | 'ready';
 }
 
 export interface PairingRecommendation {

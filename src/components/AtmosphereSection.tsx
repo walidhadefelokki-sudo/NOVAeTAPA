@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { Volume2, VolumeX, Music, Sparkles, Image as ImageIcon } from 'lucide-react';
 import { Language } from '../types';
-import image1 from '../assets/images/gallery_interior_1784994010224.jpg'
-import image2 from '../assets/images/gallery_exterior_1784994025154.jpg'
-import image3 from '../assets/images/gallery_plates_1784994038567.jpg'
-import image4 from '../assets/images/gallery_atmosphere_1784994049405.jpg'
 
 interface AtmosphereSectionProps {
   currentLang: Language;
@@ -18,22 +14,22 @@ export const AtmosphereSection: React.FC<AtmosphereSectionProps> = ({ currentLan
     {
       title: currentLang === 'es' ? 'Interior & Salon Lounge' : 'Modern Interior Lounge',
       subtitle: currentLang === 'es' ? 'Diseño acogedor con toque mediterráneo' : 'Warm contemporary Mediterranean design',
-      image: image1,
+      image: '/src/assets/images/gallery_interior_1784994010224.jpg',
     },
     {
       title: currentLang === 'es' ? 'Terraza Exterior' : 'Sunlit Outdoor Terrace',
       subtitle: currentLang === 'es' ? 'Junto al Passeig Marítim de Palma Nova' : 'On Palma Nova Beach Promenade',
-      image: image2,
+      image: '/src/assets/images/gallery_exterior_1784994025154.jpg',
     },
     {
       title: currentLang === 'es' ? 'Nuestras Tapas & Platos' : 'Gourmet Plates & Tapas',
       subtitle: currentLang === 'es' ? 'Bravas, gambas, ibéricos y mariscos' : 'Sizzling prawns, bravas & fresh seafood',
-      image: image3,
+      image: '/src/assets/images/gallery_plates_1784994038567.jpg',
     },
     {
       title: currentLang === 'es' ? 'Ambiente Sunset & Vibe' : 'Evening Vibe & Atmosphere',
       subtitle: currentLang === 'es' ? 'Luces cálidas y coctelería al atardecer' : 'Twilight lights, cocktails & relaxed music',
-      image: image4,
+      image: '/src/assets/images/gallery_atmosphere_1784994049405.jpg',
     },
   ];
 

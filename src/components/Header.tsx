@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, MapPin, Clock, Utensils, Globe, Menu as MenuIcon, X, Wine, ShoppingBag } from 'lucide-react';
 import { Language } from '../types';
+import logoImage from '../assets/images/logoimage.png';
 
 interface HeaderProps {
   currentLang: Language;
@@ -110,11 +111,11 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Logo Brand matching Nova eTapa poster */}
           <a href="#" className="group flex items-center gap-2 sm:gap-3 shrink-0">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-black border-2 border-red-600 flex items-center justify-center transition-all relative overflow-hidden shrink-0">
-              <div className="absolute top-1 left-1 w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-red-600" />
-              <div className="absolute bottom-1 right-1 w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-white" />
-              <Wine className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
-            </div>
+            <img
+              src={logoImage}
+              alt="Dar L'emploi"
+              className="h-10 sm:h-12 w-auto block object-contain"
+            />
             <div>
               <div className="text-lg sm:text-2xl font-black tracking-tight text-black flex items-center gap-0.5 leading-none uppercase">
                 <span>Nova</span>

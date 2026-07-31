@@ -79,11 +79,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenOrderModal })
                   {currentLang === 'es' ? 'Opiniones 4.7★' : '4.7★ Google Reviews'}
                 </a>
               </li>
-              <li>
-                <a href="#atmosphere" className="hover:text-red-600 transition-colors">
-                  {currentLang === 'es' ? 'Galería & Ambiente' : 'Gallery & Vibe'}
-                </a>
-              </li>
+              
               <li>
                 <a href="#location" className="hover:text-red-600 transition-colors">
                   {currentLang === 'es' ? 'Ubicación' : 'Location & Map'}

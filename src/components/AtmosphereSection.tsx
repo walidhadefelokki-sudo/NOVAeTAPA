@@ -20,11 +20,6 @@ export const AtmosphereSection: React.FC<AtmosphereSectionProps> = ({ currentLan
       image: image1,
     },
     {
-      title: currentLang === 'es' ? 'Terraza Exterior' : 'Sunlit Outdoor Terrace',
-      subtitle: currentLang === 'es' ? 'Junto al Passeig Marítim de Palma Nova' : 'On Palma Nova Beach Promenade',
-      image: image2,
-    },
-    {
       title: currentLang === 'es' ? 'Nuestras Tapas & Platos' : 'Gourmet Plates & Tapas',
       subtitle: currentLang === 'es' ? 'Bravas, gambas, ibéricos y mariscos' : 'Sizzling prawns, bravas & fresh seafood',
       image: image3,
@@ -69,45 +64,7 @@ export const AtmosphereSection: React.FC<AtmosphereSectionProps> = ({ currentLan
     <section id="atmosphere" className="py-16 lg:py-24 bg-paper-textured text-zinc-900 border-b border-zinc-300 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-12">
-          <div className="space-y-2 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black text-white text-xs font-black uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-red-500" />
-              <span>{currentLang === 'es' ? 'El Ambiente en NOVA eTAPA' : 'The NOVAeTAPA Experience'}</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-black uppercase">
-              {currentLang === 'es' ? 'Ambiente & ' : 'Atmosphere & '}
-              <span className="text-red-600 font-serif italic">Palma Nova Vibes</span>
-            </h2>
-            <p className="text-zinc-700 text-xs sm:text-sm font-medium max-w-xl">
-              {currentLang === 'es'
-                ? 'Disfruta de nuestro diseño cuidado, terraza exterior y música lounge a pocos pasos del mar.'
-                : 'Immerse yourself in our stylish lounge, open terrace, and beachside energy.'}
-            </p>
-          </div>
-
-          {/* Ambient Soundtrack Toggle Button */}
-          <button
-            onClick={toggleSoundtrack}
-            className={`px-4 py-3 rounded-xl border-2 text-xs font-extrabold transition-all active:scale-95 flex items-center gap-2.5 shrink-0 uppercase tracking-wider ${
-              isPlayingAudio
-                ? 'bg-red-600 border-red-700 text-white shadow-sm'
-                : 'bg-white border-zinc-300 text-zinc-900 hover:border-black'
-            }`}
-          >
-            {isPlayingAudio ? (
-              <>
-                <Volume2 className="w-4 h-4 text-white" />
-                <span>{currentLang === 'es' ? 'Música Palma Sunset (Sonando)' : 'Ambient Beats (Playing)'}</span>
-              </>
-            ) : (
-              <>
-                <VolumeX className="w-4 h-4 text-red-600" />
-                <span>{currentLang === 'es' ? 'Reproducir Música de Fondo' : 'Play Ambient Sound'}</span>
-              </>
-            )}
-          </button>
-        </div>
+        
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

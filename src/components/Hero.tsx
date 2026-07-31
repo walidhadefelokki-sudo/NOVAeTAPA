@@ -89,14 +89,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenOrderModal }) => 
 
             {/* Action CTAs */}
             <div className="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <button
-                onClick={onOpenOrderModal}
-                className="w-full sm:w-auto min-h-[52px] px-9 py-4 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white font-black text-base shadow-md border-2 border-red-700 transition-all flex items-center justify-center gap-3 group uppercase tracking-wider"
-              >
-                <ShoppingBag className="w-5 h-5 text-white" />
-                <span>{t.ctaReserve}</span>
-                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
-              </button>
+              
 
               <a
                 href="#menu"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SelectedOrderItem, Language } from '../types';
-import { ShoppingBag, X, Trash2, Plus, Minus, ArrowRight, Utensils, Wine } from 'lucide-react';
+import { ShoppingBag, X, Trash2, Plus, Minus, ArrowRight, Utensils, Wine, Phone } from 'lucide-react';
 
 interface TastingOrderDrawerProps {
   isOpen: boolean;
@@ -8,7 +8,7 @@ interface TastingOrderDrawerProps {
   selectedItems: SelectedOrderItem[];
   onUpdateQuantity: (itemId: string, delta: number) => void;
   onClearOrder: () => void;
-  onOpenOrderModal: () => void;
+  onOpenReservationWithOrder: () => void;
   currentLang: Language;
 }
 
@@ -18,7 +18,7 @@ export const TastingOrderDrawer: React.FC<TastingOrderDrawerProps> = ({
   selectedItems,
   onUpdateQuantity,
   onClearOrder,
-  onOpenOrderModal,
+  onOpenReservationWithOrder,
   currentLang,
 }) => {
   if (!isOpen) return null;
@@ -116,16 +116,17 @@ export const TastingOrderDrawer: React.FC<TastingOrderDrawerProps> = ({
             </div>
 
             <div className="space-y-2">
-              <button
+              <a
+                href="tel:+34971678190"
                 onClick={() => {
                   onClose();
-                  onOpenOrderModal();
+                  onOpenReservationWithOrder();
                 }}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-red-700 via-red-600 to-red-800 hover:from-red-600 hover:to-red-700 active:scale-95 text-white font-extrabold text-xs shadow-xl shadow-red-950 flex items-center justify-center gap-2 transition-all uppercase tracking-wider"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-red-700 via-red-600 to-red-800 hover:from-red-600 hover:to-red-700 active:scale-95 text-white font-extrabold text-xs shadow-xl shadow-red-950 flex items-center justify-center gap-2 transition-all uppercase tracking-wider text-center"
               >
-                <span>{currentLang === 'es' ? 'Realizar Pedido con mi Teléfono' : 'Place Order with Phone Number'}</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+                <Phone className="w-4 h-4" />
+                <span>{currentLang === 'es' ? 'Llamar para Pedir: +34 971 67 81 90' : 'Call to Order: +34 971 67 81 90'}</span>
+              </a>
 
               <button
                 onClick={onClearOrder}

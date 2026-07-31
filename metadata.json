@@ -1,6 +1,6 @@
 {
-  "name": "Remix: NOVAeTAPA Palma Nova",
-  "description": "Exclusive Cocktail Lounge & Authentic Tapas Bar in Palma Nova, Balearic Islands, Spain. Featuring signature mixology, online ordering by phone, interactive menu, and guest reviews.",
+  "name": "Remix NOVAeTAPA Palma Nova",
+  "description": "Exclusive Cocktail Lounge \u0026 Authentic Tapas Bar in Palma Nova, Balearic Islands, Spain. Featuring signature mixology, table reservations, interactive menu, and guest reviews.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

@@ -9,7 +9,8 @@ export type MenuCategory =
   | 'huevos'
   | 'platos_combinados'
   | 'pa_amb_oli'
-  | 'ensaladas_wraps'
+  | 'ensaladas'
+  | 'wraps'
   | 'pastas'
   | 'bebidas_sangrias'
   | 'postres';
@@ -44,15 +45,18 @@ export interface ReviewItem {
   categoryTags?: string[];
 }
 
-export interface OnlineOrderRequest {
+export interface ReservationRequest {
   id?: string;
+  guestName: string;
+  email: string;
   phone: string;
-  customerName?: string;
-  items: SelectedOrderItem[];
-  totalAmount: number;
-  notes?: string;
+  date: string;
+  time: string;
+  guestsCount: number;
+  seatingArea: 'terrace' | 'lounge' | 'bar';
+  specialRequests?: string;
   createdAt?: string;
-  status?: 'confirmed' | 'preparing' | 'ready';
+  status?: 'confirmed' | 'pending';
 }
 
 export interface PairingRecommendation {

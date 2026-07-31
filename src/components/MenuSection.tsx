@@ -18,20 +18,21 @@ import {
   Salad,
   Beer,
   ChevronDown,
+  Phone,
 } from 'lucide-react';
 
 interface MenuSectionProps {
   currentLang: Language;
   onAddItemToTray: (item: MenuItem) => void;
   selectedItemsMap: Record<string, number>;
-  onOpenOrderModal: () => void;
+  onOpenReservation: () => void;
 }
 
 export const MenuSection: React.FC<MenuSectionProps> = ({
   currentLang,
   onAddItemToTray,
   selectedItemsMap,
-  onOpenOrderModal,
+  onOpenReservation,
 }) => {
   const [activeTab, setActiveTab] = useState<MenuCategory | 'all'>('all');
   const [activeFilterTag, setActiveFilterTag] = useState<string>('all');
@@ -48,7 +49,8 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
     huevos: false,
     platos_combinados: false,
     pa_amb_oli: false,
-    ensaladas_wraps: false,
+    ensaladas: false,
+    wraps: false,
     pastas: false,
     bebidas_sangrias: false,
     postres: false,
@@ -67,7 +69,8 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
       huevos: 'Huevos en Sartén',
       platos_combinados: 'Platos Combinados',
       pa_amb_oli: 'Pa Amb Oli (Mallorca)',
-      ensaladas_wraps: 'Ensaladas & Wraps',
+      ensaladas: 'Ensaladas',
+      wraps: 'Wraps',
       pastas: 'Pastas',
       bebidas_sangrias: 'Sangrías & Bebidas',
       postres: 'Postres & Helados',
@@ -82,7 +85,8 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
       huevos: 'Pan-Fried Eggs',
       platos_combinados: 'Combined Plates',
       pa_amb_oli: 'Pa Amb Oli (Mallorca)',
-      ensaladas_wraps: 'Salads & Wraps',
+      ensaladas: 'Salads',
+      wraps: 'Gourmet Wraps',
       pastas: 'Pastas',
       bebidas_sangrias: 'Sangrias & Drinks',
       postres: 'Desserts & Ice Cream',
@@ -99,7 +103,8 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
       huevos: 'Huevos rotos de corral fritos en sartén con jamón, sobrasada o gulas',
       platos_combinados: 'Platos completos tradicionales con guarnición recién hecha',
       pa_amb_oli: 'Especialidad mallorquina tradicional en pan rústico con tomate de ramellet',
-      ensaladas_wraps: 'Opciones frescas, mediterráneas y ligeras',
+      ensaladas: 'Ensaladas frescas y variadas preparadas al momento',
+      wraps: 'Wraps enrollados al momento acompañados de patatas fritas',
       pastas: 'Pastas hechas al momento con salsas artesanales',
       bebidas_sangrias: 'Sangrías caseras maceradas, cervezas heladas y vinos locales',
       postres: 'El toque dulce final y helados artesanos',
@@ -113,7 +118,8 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
       huevos: 'Pan-fried free-range eggs with Iberian ham, chorizo or garlic elvers',
       platos_combinados: 'Full traditional combined plates with freshly made garnish',
       pa_amb_oli: 'Traditional Mallorcan rustic bread with ramellet tomatoes & olive oil',
-      ensaladas_wraps: 'Fresh, Mediterranean and light wraps & salads',
+      ensaladas: 'Fresh handcrafted salads prepared with crisp local ingredients',
+      wraps: 'Freshly rolled gourmet wraps served with crispy french fries',
       pastas: 'Fresh pasta dishes prepared with homemade sauces',
       bebidas_sangrias: 'House-macerated sangrias, ice cold beers & local wines',
       postres: 'Artisanal desserts & sweet ice cream treats',
@@ -132,7 +138,8 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
     'huevos',
     'platos_combinados',
     'pa_amb_oli',
-    'ensaladas_wraps',
+    'ensaladas',
+    'wraps',
     'pastas',
     'bebidas_sangrias',
     'postres',
@@ -229,8 +236,10 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
         return <Utensils className="w-5 h-5 text-red-500" />;
       case 'pa_amb_oli':
         return <UtensilsCrossed className="w-5 h-5 text-red-600" />;
-      case 'ensaladas_wraps':
+      case 'ensaladas':
         return <Salad className="w-5 h-5 text-emerald-600" />;
+      case 'wraps':
+        return <UtensilsCrossed className="w-5 h-5 text-emerald-600" />;
       case 'pastas':
         return <Utensils className="w-5 h-5 text-amber-600" />;
       case 'bebidas_sangrias':
@@ -358,62 +367,92 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
           </div>
         </div>
 
-        {/* Chef's Signature Pairings Showcase Banner */}
+        {/* Combos para 2 Personas Showcase Banner */}
         {activeTab === 'all' && !searchQuery && activeFilterTag === 'all' && (
           <div className="mt-8 p-6 rounded-2xl bg-black text-white border-2 border-zinc-900 shadow-xl space-y-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-zinc-800 pb-4">
               <div>
                 <span className="text-[11px] font-black uppercase text-red-500 tracking-widest flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  {currentLang === 'es' ? 'Combinaciones Recomendadas' : 'Chef’s Signature Tapas Pairings'}
+                  {currentLang === 'es' ? 'Combinados Especiales' : 'Special Sharing Combos'}
                 </span>
                 <h3 className="text-xl font-black text-white uppercase tracking-tight mt-0.5">
-                  {currentLang === 'es' ? 'Maridajes Insuperables de la Casa' : 'Best Seller Pairings in Palma Nova'}
+                  {currentLang === 'es' ? 'Variados Especiales para Compartir (2 Personas)' : 'Mixed Tapas Combos to Share (For 2)'}
                 </h3>
               </div>
-              <span className="text-xs text-zinc-400 font-bold bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">
-                {currentLang === 'es' ? 'Acompaña tu Copa' : 'Perfect for 2 Sharing'}
+              <span className="text-xs text-red-400 font-bold bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800 uppercase tracking-wider">
+                {currentLang === 'es' ? 'Servido con pan' : 'Served with bread'}
               </span>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Pairing 1 */}
-              <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-red-600/60 transition-all space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="text-xs font-black text-white uppercase tracking-wider">Gambas + Sangría Tinta</div>
-                  <span className="text-xs text-red-400 font-black px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">14.85 €</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {/* Combo 1: Combo Mediterráneo */}
+              <div className="p-5 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-red-600 transition-all space-y-3 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2 border-b border-zinc-800 pb-2">
+                    <h4 className="text-sm font-black text-white uppercase tracking-wider">COMBO MEDITERRÁNEO</h4>
+                    <span className="text-sm text-red-500 font-black px-2.5 py-0.5 rounded-lg bg-black border border-red-900">27,95 €</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400 font-medium italic">
+                    {currentLang === 'es' ? 'Variados especiales para compartir 2 personas' : 'Mixed tapas to share for 2 persons'}
+                  </p>
+                  <ol className="text-xs text-zinc-300 space-y-1 font-medium pl-1">
+                    <li><strong className="text-red-400">1.</strong> Jamón Serrano</li>
+                    <li><strong className="text-red-400">2.</strong> Queso Manchego</li>
+                    <li><strong className="text-red-400">3.</strong> Colas de langostinos al ajillo</li>
+                    <li><strong className="text-red-400">4.</strong> Patatas fritas con alioli</li>
+                    <li><strong className="text-red-400">5.</strong> Pimientos del Padrón</li>
+                  </ol>
                 </div>
-                <p className="text-[11px] text-zinc-400 leading-snug">
-                  {currentLang === 'es'
-                    ? 'Langostinos borboteando al ajillo con nuestra jarra de sangría casera macerada.'
-                    : 'Sizzling garlic prawns paired with cold house red wine sangria.'}
-                </p>
+                <div className="pt-2 border-t border-zinc-800 text-[10px] text-zinc-400 font-bold uppercase tracking-wider text-right">
+                  {currentLang === 'es' ? 'Servido con pan' : 'Served with bread'}
+                </div>
               </div>
 
-              {/* Pairing 2 */}
-              <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-red-600/60 transition-all space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="text-xs font-black text-white uppercase tracking-wider">Quesos Mahón + Palma Crimson</div>
-                  <span className="text-xs text-red-400 font-black px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">21.00 €</span>
+              {/* Combo 2: Combo Tapas del Mar */}
+              <div className="p-5 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-red-600 transition-all space-y-3 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2 border-b border-zinc-800 pb-2">
+                    <h4 className="text-sm font-black text-white uppercase tracking-wider">COMBO TAPAS DEL MAR</h4>
+                    <span className="text-sm text-red-500 font-black px-2.5 py-0.5 rounded-lg bg-black border border-red-900">33,95 €</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400 font-medium italic">
+                    {currentLang === 'es' ? 'Variados especiales para compartir 2 personas' : 'Mixed tapas to share for 2 persons'}
+                  </p>
+                  <ol className="text-xs text-zinc-300 space-y-1 font-medium pl-1">
+                    <li><strong className="text-red-400">1.</strong> Croquetas de bacalao</li>
+                    <li><strong className="text-red-400">2.</strong> Mejillones a la marinera</li>
+                    <li><strong className="text-red-400">3.</strong> Sepia encebollada</li>
+                    <li><strong className="text-red-400">4.</strong> Calamares a la andaluza</li>
+                    <li><strong className="text-red-400">5.</strong> Colas de langostinos al ajillo</li>
+                  </ol>
                 </div>
-                <p className="text-[11px] text-zinc-400 leading-snug">
-                  {currentLang === 'es'
-                    ? 'Tabla de Queso Manchego y Mahonés con nuestro cóctel ahumado de autor.'
-                    : 'Aged Manchego & Mahón cheese board with smoked signature cocktail.'}
-                </p>
+                <div className="pt-2 border-t border-zinc-800 text-[10px] text-zinc-400 font-bold uppercase tracking-wider text-right">
+                  {currentLang === 'es' ? 'Servido con pan' : 'Served with bread'}
+                </div>
               </div>
 
-              {/* Pairing 3 */}
-              <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-red-600/60 transition-all space-y-2">
-                <div className="flex items-center justify-between gap-2">
-                  <div className="text-xs font-black text-white uppercase tracking-wider">Pa amb Oli + Rosa Blanca</div>
-                  <span className="text-xs text-red-400 font-black px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">12.70 €</span>
+              {/* Combo 3: Combo Tapas */}
+              <div className="p-5 rounded-xl bg-zinc-900/90 border border-zinc-800 hover:border-red-600 transition-all space-y-3 flex flex-col justify-between">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2 border-b border-zinc-800 pb-2">
+                    <h4 className="text-sm font-black text-white uppercase tracking-wider">COMBO TAPAS</h4>
+                    <span className="text-sm text-red-500 font-black px-2.5 py-0.5 rounded-lg bg-black border border-red-900">29,95 €</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400 font-medium italic">
+                    {currentLang === 'es' ? 'Variados especiales para compartir 2 personas' : 'Mixed tapas to share for 2 persons'}
+                  </p>
+                  <ol className="text-xs text-zinc-300 space-y-1 font-medium pl-1">
+                    <li><strong className="text-red-400">1.</strong> Albóndigas en salsa casera</li>
+                    <li><strong className="text-red-400">2.</strong> Colas de langostinos al ajillo</li>
+                    <li><strong className="text-red-400">3.</strong> Croquetas de Pollo</li>
+                    <li><strong className="text-red-400">4.</strong> Patatas Bravas</li>
+                    <li><strong className="text-red-400">5.</strong> Champiñones al ajillo</li>
+                  </ol>
                 </div>
-                <p className="text-[11px] text-zinc-400 leading-snug">
-                  {currentLang === 'es'
-                    ? 'Pan tostado con tomate de ramellet, jamón ibérico y cerveza artesana helada.'
-                    : 'Toasted Mallorcan bread with ramellet tomato, ham & hoppy local lager.'}
-                </p>
+                <div className="pt-2 border-t border-zinc-800 text-[10px] text-zinc-400 font-bold uppercase tracking-wider text-right">
+                  {currentLang === 'es' ? 'Servido con pan' : 'Served with bread'}
+                </div>
               </div>
             </div>
           </div>
@@ -547,36 +586,10 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                                 <button
                                   type="button"
                                   onClick={() => setDetailModalItem(item)}
-                                  className="text-xs text-zinc-600 hover:text-black flex items-center gap-1 transition-colors font-bold active:scale-95"
+                                  className="w-full py-2 px-3 rounded-xl bg-zinc-100 hover:bg-black hover:text-white border border-zinc-300 text-xs text-zinc-800 flex items-center justify-center gap-1.5 transition-all font-extrabold active:scale-95 uppercase tracking-wider"
                                 >
                                   <Info className="w-3.5 h-3.5 text-red-600" />
-                                  <span>{currentLang === 'es' ? 'Detalles' : 'Details'}</span>
-                                </button>
-
-                                <button
-                                  type="button"
-                                  onClick={() => onAddItemToTray(item)}
-                                  className={`px-3.5 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 active:scale-95 uppercase tracking-wider ${
-                                    countInTray > 0
-                                      ? 'bg-emerald-600 text-white border border-emerald-700'
-                                      : 'bg-red-600 hover:bg-red-700 text-white'
-                                  }`}
-                                >
-                                  {countInTray > 0 ? (
-                                    <>
-                                      <Check className="w-3.5 h-3.5 text-white" />
-                                      <span>
-                                        {currentLang === 'es'
-                                          ? `Añadido (${countInTray})`
-                                          : `Added (${countInTray})`}
-                                      </span>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <Plus className="w-3.5 h-3.5 text-white" />
-                                      <span>{currentLang === 'es' ? 'Añadir' : 'Add'}</span>
-                                    </>
-                                  )}
+                                  <span>{currentLang === 'es' ? 'Ver Detalles' : 'View Details'}</span>
                                 </button>
                               </div>
                             </motion.div>
@@ -621,22 +634,24 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
               <Sparkles className="w-5 h-5 text-red-500" />
               <span>
                 {currentLang === 'es'
-                  ? '¿Quieres hacer tu pedido online en Palma Nova?'
-                  : 'Want to place an online order in Palma Nova?'}
+                  ? '¿Quieres reservar mesa para cenar en Palma Nova?'
+                  : 'Want to book a table for dinner in Palma Nova?'}
               </span>
             </h4>
             <p className="text-xs text-zinc-300 font-medium">
               {currentLang === 'es'
-                ? 'Introduce tu número de teléfono y confirma tu pedido de tapas y bebidas al instante.'
-                : 'Enter your phone number and confirm your tapas & drinks order instantly.'}
+                ? 'Garantiza tu mesa en terraza o interior para disfrutar de nuestras tapas y copas recién hechas.'
+                : 'Guarantee your table on our terrace or dining area to enjoy fresh tapas and cocktails.'}
             </p>
           </div>
-          <button
-            onClick={onOpenOrderModal}
-            className="px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-black text-xs sm:text-sm transition-all shrink-0 uppercase tracking-widest active:scale-95"
+          <a
+            href="tel:+34971678190"
+            onClick={() => onOpenReservation()}
+            className="px-6 py-3.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-black text-xs sm:text-sm transition-all shrink-0 uppercase tracking-widest active:scale-95 flex items-center gap-2"
           >
-            {currentLang === 'es' ? 'Pedir Online' : 'Order Online'}
-          </button>
+            <Phone className="w-4 h-4" />
+            <span>{currentLang === 'es' ? 'Llamar a +34 971 67 81 90' : 'Call +34 971 67 81 90'}</span>
+          </a>
         </div>
       </div>
 
@@ -704,19 +719,10 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                 </div>
               )}
 
-              <div className="pt-4 flex items-center gap-3">
-                <button
-                  onClick={() => {
-                    onAddItemToTray(detailModalItem);
-                    setDetailModalItem(null);
-                  }}
-                  className="flex-1 py-3.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-white font-black text-xs transition-colors uppercase tracking-wider"
-                >
-                  {currentLang === 'es' ? 'Añadir al Pedido' : 'Add to Order'}
-                </button>
+              <div className="pt-4 flex items-center justify-end">
                 <button
                   onClick={() => setDetailModalItem(null)}
-                  className="px-4 py-3.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 active:scale-95 text-zinc-800 text-xs font-bold border border-zinc-300"
+                  className="w-full py-3.5 rounded-xl bg-black hover:bg-zinc-800 active:scale-95 text-white text-xs font-black uppercase tracking-wider transition-colors"
                 >
                   {currentLang === 'es' ? 'Cerrar' : 'Close'}
                 </button>

@@ -99,8 +99,6 @@ export const Footer: React.FC<FooterProps> = ({ currentLang, onOpenOrderModal })
               <li>Gambas al Ajillo</li>
               <li>Patatas Bravas Caseras</li>
               <li>Sangría de Cava</li>
-              <li>Espresso Martini Especial</li>
-              <li>Jamón Ibérico de Bellota</li>
             </ul>
           </div>
         </div>

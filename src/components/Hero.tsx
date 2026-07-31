@@ -189,12 +189,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenOrderModal }) => 
                       </div>
                     </div>
 
-                    <button
-                      onClick={onOpenOrderModal}
-                      className="px-3.5 py-2 text-xs font-black rounded-xl bg-red-600 hover:bg-red-500 active:scale-95 text-white transition-all uppercase tracking-wider shrink-0 shadow-sm"
-                    >
-                      {currentLang === 'es' ? 'Pedir' : 'Order'}
-                    </button>
+                    
                   </div>
                 </div>
 
@@ -212,7 +207,7 @@ export const Hero: React.FC<HeroProps> = ({ currentLang, onOpenOrderModal }) => 
                     <Clock className="w-4 h-4 text-red-500 shrink-0" />
                     <div>
                       <div className="font-black text-[11px] uppercase">Horario Amplio</div>
-                      <div className="text-[10px] text-zinc-400">10:00 AM – 02:00 AM</div>
+                      <div className="text-[10px] text-zinc-400">10:00 AM – 11:00 PM</div>
                     </div>
                   </div>
                 </div>

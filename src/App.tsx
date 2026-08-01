@@ -3,7 +3,6 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { MenuSection } from './components/MenuSection';
 import { ReviewsSection } from './components/ReviewsSection';
-import { AtmosphereSection } from './components/AtmosphereSection';
 import { LocationSection } from './components/LocationSection';
 import { Footer } from './components/Footer';
 import { ReservationModal } from './components/ReservationModal';

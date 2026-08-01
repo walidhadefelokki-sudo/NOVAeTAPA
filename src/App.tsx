@@ -91,7 +91,7 @@ export default function App() {
 
           <ReviewsSection currentLang={currentLang} />
 
-          <AtmosphereSection currentLang={currentLang} />
+          
 
           <LocationSection currentLang={currentLang} />
         </main>
